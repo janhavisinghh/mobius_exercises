@@ -8,5 +8,9 @@ class LoginViewRenderer(private val loginView: LoginView) {
         } else if (model.loginStatus == LoginStatus.FAIL) {
             loginView.hideProgress()
         }
+
+        if(model.usernameInputError == ValidationError.INVALID){
+            loginView.showUsernameError()
+        }
     }
 }

@@ -33,6 +33,12 @@ class LoginViewRendererTest {
         verifyNoMoreInteractions(loginView)
     }
 
+@Test
+fun `it should render username error`() {
+    viewRenderer.render(initModel.inputError(ValidationError.INVALID, null))
+    verify(loginView).showUsernameError()
+    verifyNoMoreInteractions(loginView)
+}
 
 
 
