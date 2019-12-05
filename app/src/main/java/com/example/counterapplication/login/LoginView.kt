@@ -4,4 +4,5 @@ interface LoginView {
     fun showProgress()
     fun hideProgress()
     fun showUsernameError()
+    fun showPasswordError()
 }

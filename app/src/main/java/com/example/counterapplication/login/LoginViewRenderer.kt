@@ -12,5 +12,8 @@ class LoginViewRenderer(private val loginView: LoginView) {
         if(model.usernameInputError == ValidationError.INVALID){
             loginView.showUsernameError()
         }
+        if(model.passwordInputError == ValidationError.INVALID){
+            loginView.showPasswordError()
+        }
     }
 }
