@@ -2,6 +2,7 @@ package com.example.counterapplication.login
 
 import com.example.counterapplication.login.ValidationError.INVALID
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.spotify.mobius.Connection
 import com.spotify.mobius.test.RecordingConsumer
@@ -12,7 +13,8 @@ import org.junit.Test
 class LoginEffectHandlerTest {
 
     private val loginApiStub = mock<LoginApiStub>()
-    private val effectHandler = LoginEffectHandler(loginApiStub)
+    private val viewActions = mock<LoginViewActions>()
+    private val effectHandler = LoginEffectHandler(loginApiStub, viewActions)
     private val consumer = RecordingConsumer<LoginEvent>()
     private lateinit var connection: Connection<LoginEffect>
 
@@ -56,10 +58,30 @@ class LoginEffectHandlerTest {
     fun `when login is failed, show error message toast`() {
         connection.accept(ShowErrorMessageToast(NetworkErrorMessage.INPUT_ERROR))
 
-        consumer.assertValues(NetworkCallFailed(NetworkErrorMessage.INPUT_ERROR))
+        verify(viewActions).showErrorMessageToast(NetworkErrorMessage.INPUT_ERROR)
     }
 
+    @Test
+    fun `when username is entered, clear username not entered error`() {
+        connection.accept(ClearUsernameError)
+        verify(viewActions).clearUsernameError()
+    }
 
+    @Test
+    fun `when password is entered, clear password not entered error`() {
+        connection.accept(ClearPasswordError)
+        verify(viewActions).clearPasswordError()
+    }
 
+    @Test
+    fun `when network call is successful, then show homescreen`() {
+        connection.accept(ShowHomeScreen)
+        verify(viewActions).showHomeScreen()
+    }
 
+    @Test
+    fun `when network call is successful, then save token`() {
+        connection.accept(SaveToken("real-auth-token"))
+        verify(viewActions).saveToken("real-auth-token")
+    }
 }

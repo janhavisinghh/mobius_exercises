@@ -8,9 +8,9 @@ data class InputIsValid(val username: String, val password: String) : LoginEvent
 
 data class InputIsInvalid(val usernameError: ValidationError?, val passwordError: ValidationError?) : LoginEvent()
 
-data class UserNameEntered(val username: String) : LoginEvent()
+object UserNameEntered : LoginEvent()
 
-data class PasswordEntered(val password: String) : LoginEvent()
+object PasswordEntered: LoginEvent()
 
 data class NetworkCallFailed(val errorMessage: NetworkErrorMessage?) : LoginEvent()
 

@@ -1,13 +1,12 @@
 package com.example.counterapplication.login
 
-import android.widget.Toast
 import com.spotify.mobius.Connectable
 import com.spotify.mobius.Connection
 import com.spotify.mobius.functions.Consumer
-import kotlin.coroutines.coroutineContext
 
 class LoginEffectHandler(
-    private val loginApiStub: LoginApiStub
+    private val loginApiStub: LoginApiStub,
+    private val loginViewActions: LoginViewActions
 ) : Connectable<LoginEffect, LoginEvent> {
     override fun connect(output: Consumer<LoginEvent>): Connection<LoginEffect> {
      return object : Connection<LoginEffect> {
@@ -33,7 +32,23 @@ class LoginEffectHandler(
                 }
 
                 is ShowErrorMessageToast -> {
-                    output.accept(NetworkCallFailed(value.errorMessage))
+                    loginViewActions.showErrorMessageToast(value.errorMessage)
+                }
+
+                is ClearUsernameError -> {
+                    loginViewActions.clearUsernameError()
+                }
+
+                is ClearPasswordError -> {
+                    loginViewActions.clearPasswordError()
+                }
+
+                is ShowHomeScreen -> {
+                    loginViewActions.showHomeScreen()
+                }
+
+                is SaveToken -> {
+                    loginViewActions.saveToken(value.token)
                 }
 
             }

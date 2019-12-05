@@ -42,7 +42,7 @@ class LoginUpdateTest {
     fun `when user enters username , then clear username input error`() {
         updateSpec
             .given(LoginModel.INIT.inputError(ValidationError.INVALID, null))
-            .whenEvent(UserNameEntered(username))
+            .whenEvent(UserNameEntered)
             .then(
                 assertThatNext(
                     hasModel(LoginModel.INIT.inputError(ValidationError.INVALID, null).clearUsernameError()),
@@ -56,7 +56,7 @@ class LoginUpdateTest {
     fun `when user enters password, then clear password input error`() {
         updateSpec
             .given(LoginModel.INIT.inputError(null, ValidationError.INVALID))
-            .whenEvent(PasswordEntered(password))
+            .whenEvent(PasswordEntered)
             .then(
                 assertThatNext(
                     hasModel(LoginModel.INIT.inputError(null, ValidationError.INVALID).clearPasswordError()),
