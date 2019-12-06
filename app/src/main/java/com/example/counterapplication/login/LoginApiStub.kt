@@ -5,7 +5,6 @@ interface LoginApiStub {
 }
 
 class LoginApiStubImpl : LoginApiStub {
-
     override fun login(username: String, password: String): String {
         return "real-auth-token"
     }

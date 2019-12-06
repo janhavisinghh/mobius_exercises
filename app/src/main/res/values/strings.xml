@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CounterApplication</string>
+    <string name="app_name">Login App</string>
     <string name="username_error">You haven\'t entered the username</string>
     <string name="username">Username</string>
     <string name="password_error">You haven\'t entered the password</string>

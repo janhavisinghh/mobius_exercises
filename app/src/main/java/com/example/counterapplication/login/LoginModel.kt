@@ -1,11 +1,15 @@
 package com.example.counterapplication.login
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class LoginModel(
     val loginStatus : LoginStatus?,
     val usernameInputError: ValidationError?,
     val passwordInputError: ValidationError?,
     val networkErrorMessage: NetworkErrorMessage?
-) {
+) : Parcelable {
     companion object {
         val INIT = LoginModel(null, null, null, null)
     }

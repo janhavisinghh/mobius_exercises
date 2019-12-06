@@ -6,7 +6,8 @@ import com.spotify.mobius.functions.Consumer
 
 class LoginEffectHandler(
     private val loginApiStub: LoginApiStub,
-    private val loginViewActions: LoginViewActions
+    private val loginViewActions: LoginViewActions,
+    private val repo: Repo
 ) : Connectable<LoginEffect, LoginEvent> {
     override fun connect(output: Consumer<LoginEvent>): Connection<LoginEffect> {
      return object : Connection<LoginEffect> {
@@ -48,7 +49,7 @@ class LoginEffectHandler(
                 }
 
                 is SaveToken -> {
-                    loginViewActions.saveToken(value.token)
+                    repo.saveToken(value.token)
                 }
 
             }

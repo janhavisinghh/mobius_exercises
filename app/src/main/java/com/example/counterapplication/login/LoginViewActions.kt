@@ -6,6 +6,4 @@ interface LoginViewActions {
     fun clearUsernameError()
     fun clearPasswordError()
     fun showHomeScreen()
-    fun saveToken(token: String)
-
 }
